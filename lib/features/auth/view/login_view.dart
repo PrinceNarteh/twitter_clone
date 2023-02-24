@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:twitter_clone/common/rounded_small_button.dart';
 import 'package:twitter_clone/constants/constants.dart';
 import 'package:twitter_clone/features/auth/widgets/auth_field.dart';
+import 'package:twitter_clone/theme/theme.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -49,6 +50,21 @@ class _LoginViewState extends State<LoginView> {
                     onTab: () {},
                   ),
                 ),
+                const SizedBox(height: 16),
+                RichText(
+                  text: const TextSpan(
+                    text: "Don't have an account?",
+                    style: TextStyle(fontSize: 16),
+                    children: [
+                      TextSpan(
+                          text: " Sign up",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Palette.blueColor,
+                          )),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
