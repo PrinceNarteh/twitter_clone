@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_clone/common/rounded_small_button.dart';
 import 'package:twitter_clone/constants/constants.dart';
 import 'package:twitter_clone/features/auth/widgets/auth_field.dart';
 
@@ -39,6 +40,14 @@ class _LoginViewState extends State<LoginView> {
                 AuthField(
                   controller: passwordController,
                   hintText: "Password",
+                ),
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: RoundedSmallButton(
+                    label: "Done",
+                    onTab: () {},
+                  ),
                 ),
               ],
             ),
