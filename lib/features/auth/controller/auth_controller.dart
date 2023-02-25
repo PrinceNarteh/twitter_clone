@@ -5,7 +5,9 @@ import 'package:twitter_clone/core/core.dart';
 
 final authControllerProvider =
     StateNotifierProvider<AuthController, bool>((ref) {
-  return AuthController(authAPI: ref.watch(authAPIProvider));
+  return AuthController(
+    authAPI: ref.watch(authAPIProvider),
+  );
 });
 
 class AuthController extends StateNotifier<bool> {
@@ -22,6 +24,9 @@ class AuthController extends StateNotifier<bool> {
   }) async {
     state = true;
     final res = await _authAPI.signUp(email: email, password: password);
-    res.fold((l) => showSnackBar(context, l.message), (r) => null);
+    res.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => print(r.name),
+    );
   }
 }
