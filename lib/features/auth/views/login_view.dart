@@ -60,6 +60,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       AuthField(
                         controller: passwordController,
                         hintText: "Password",
+                        obscureText: true,
                       ),
                       const SizedBox(height: 20),
                       Align(

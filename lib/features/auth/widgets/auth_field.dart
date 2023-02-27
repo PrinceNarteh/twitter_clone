@@ -4,35 +4,40 @@ import 'package:twitter_clone/theme/theme.dart';
 class AuthField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
+  final bool obscureText;
+
   const AuthField({
     super.key,
     required this.controller,
     required this.hintText,
-  });
+    bool? obscureText,
+  }) : obscureText = obscureText ?? false;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      obscureText: obscureText,
       decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: const BorderSide(
-              color: Palette.blueColor,
-              width: 3,
-            ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: const BorderSide(
+            color: Palette.blueColor,
+            width: 3,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: const BorderSide(
-              color: Palette.greyColor,
-            ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: const BorderSide(
+            color: Palette.greyColor,
           ),
-          contentPadding: const EdgeInsets.all(22),
-          hintText: hintText,
-          hintStyle: const TextStyle(
-            fontSize: 18,
-          )),
+        ),
+        contentPadding: const EdgeInsets.all(22),
+        hintText: hintText,
+        hintStyle: const TextStyle(
+          fontSize: 18,
+        ),
+      ),
     );
   }
 }
