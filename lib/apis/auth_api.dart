@@ -1,4 +1,4 @@
-import 'package:appwrite/appwrite.dart' as service;
+import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart' as model;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone/core/core.dart';
@@ -14,11 +14,16 @@ abstract class IAuthAPI {
     required String email,
     required String password,
   });
+
+  FutureEither<model.Session> login({
+    required String email,
+    required String password,
+  });
 }
 
 class AuthAPI implements IAuthAPI {
-  final service.Account _account;
-  AuthAPI({required service.Account account}) : _account = account;
+  final Account _account;
+  AuthAPI({required Account account}) : _account = account;
 
   @override
   FutureEither<model.Account> signUp({
@@ -27,12 +32,30 @@ class AuthAPI implements IAuthAPI {
   }) async {
     try {
       final account = await _account.create(
-        userId: service.ID.unique(),
+        userId: ID.unique(),
         email: email,
         password: password,
       );
       return right(account);
-    } on service.AppwriteException catch (e, stackTrace) {
+    } on AppwriteException catch (e, stackTrace) {
+      return left(
+        Failure(e.message ?? "Some unexpected error occurred", stackTrace),
+      );
+    } catch (e, stackTrace) {
+      return left(Failure(e.toString(), stackTrace));
+    }
+  }
+
+  @override
+  FutureEither<model.Session> login(
+      {required String email, required String password}) async {
+    try {
+      final session = await _account.createEmailSession(
+        email: email,
+        password: password,
+      );
+      return right(session);
+    } on AppwriteException catch (e, stackTrace) {
       return left(
         Failure(e.message ?? "Some unexpected error occurred", stackTrace),
       );
